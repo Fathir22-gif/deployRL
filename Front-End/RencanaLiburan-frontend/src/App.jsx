@@ -1,7 +1,9 @@
+import Login from "./pages/Login";
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold">RencanaLiburan</h1>
+    <div>
+      <Login />
     </div>
   );
 }
