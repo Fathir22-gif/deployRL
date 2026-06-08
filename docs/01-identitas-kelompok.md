@@ -2,13 +2,13 @@
 
 ---
 
-**Nama Kelompok:** `...`
+**Nama Kelompok:** `Kelompok 1`
 
-**Nama Proyek / Aplikasi:** `...`
+**Nama Proyek / Aplikasi:** `Rencana Liburan`
 
-**Jumlah Anggota:** `...` orang
+**Jumlah Anggota:** `3` orang
 
-**Repositori:** `https://github.com/...`
+**Repositori:** 'https://github.com/azhraaaaaaa/kelompok1'
 
 ---
 
