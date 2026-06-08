@@ -26,7 +26,7 @@
 - Nama Lengkap: `Qiyami Puji Syarifah Z`
 - NIM: `230705034`
 - Role: `Front-End`
-- Teknologi: `React, VS Code`
+- Teknologi: `React, VS Code, Figma`
 
 **Anggota 3**
 
