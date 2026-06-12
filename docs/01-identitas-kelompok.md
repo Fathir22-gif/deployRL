@@ -57,26 +57,20 @@ _(Contoh: Docker, GitHub Actions, Nginx, Railway, VPS)_
 
 _(Jelaskan secara singkat bagaimana aplikasi-aplikasi dalam proyek ini saling terhubung)_
 
-**Aplikasi 1 — Frontend**
+**Aplikasi 1 — Frontend (Figma)**
 
-- Nama Aplikasi: `...`
-- Deskripsi Singkat: `...`
-- Berkomunikasi dengan: `...`
+- Nama Aplikasi: `Rencana Liburan UI/UX Design`
+- Deskripsi Singkat: `Desain antarmuka dan prototipe interaktif aplikasi perencanaan liburan, mencakup wireframe, alur pengguna, dan komponen visual.`
+- Berkomunikasi dengan: `Tim developer frontend sebagai acuan implementasi dan tim backend untuk penyesuaian alur data.`
 
-**Aplikasi 2 — Frontend** _(khusus kelompok 5 orang)_
+**Aplikasi 2 — Backend (Laravel)**
 
-- Nama Aplikasi: `...`
-- Deskripsi Singkat: `...`
-- Berkomunikasi dengan: `...`
+- Nama Aplikasi / Service: `Rencana Liburan API`
+- Deskripsi Singkat: `RESTful API berbasis Laravel yang mengelola data destinasi, itinerary, autentikasi pengguna, dan logika bisnis aplikasi.`
+- Menyediakan layanan untuk: `Aplikasi frontend dalam mengakses, menyimpan, dan mengelola data perencanaan liburan pengguna`
 
-**Aplikasi 3 — Backend (Laravel)**
+**Aplikasi 3 — DevOps (Github)** 
 
-- Nama Aplikasi / Service: `...`
-- Deskripsi Singkat: `...`
-- Menyediakan layanan untuk: `...`
-
-**Aplikasi 4 — Backend (Laravel)** _(khusus kelompok 5 orang)_
-
-- Nama Aplikasi / Service: `...`
-- Deskripsi Singkat: `...`
-- Menyediakan layanan untuk: `...`
+- Nama Aplikasi / Service: `Rencana Liburan Repository`
+- Deskripsi Singkat: `Repositori terpusat untuk manajemen source code, version control, kolaborasi tim, dan pipeline CI/CD proyek`
+- Menyediakan layanan untuk: `Seluruh anggota tim dalam mengelola perubahan kode, code review, issue tracking, dan deployment otomatis`
