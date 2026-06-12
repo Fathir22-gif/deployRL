@@ -6,24 +6,17 @@ use App\Models\User;
 
 interface AuthServiceContract
 {
-    /**
-     * Register user baru dengan email & password.
-     *
-     * @param array{name:string, email:string, password:string} $data
-     * @return User
-     */
+    /** Register user baru dengan email & password */
+     
     public function register(array $data): User;
 
     /**
      * Login menggunakan email & password.
      * Mengembalikan JWT token jika valid.
-     *
      * @param string $email
      * @param string $password
      * @return array{token:string, user:User}
-     *
-     * @throws \App\Exceptions\InvalidCredentialsException
-     */
+     * @throws \App\Exceptions\InvalidCredentialsException*/
     public function login(string $email, string $password): array;
 
     /**
