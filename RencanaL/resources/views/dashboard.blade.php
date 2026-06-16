@@ -138,10 +138,30 @@
 
             @php
             $destinations = [
-            ['name' => 'Bali', 'location' => 'Bali, Indonesia', 'rating' => '4.9'],
-            ['name' => 'Raja Ampat', 'location' => 'Papua Barat, Indonesia', 'rating' => '4.8'],
-            ['name' => 'Labuan Bajo', 'location' => 'Nusa Tenggara Timur, Indonesia', 'rating' => '4.7'],
-            ['name' => 'Danau Toba', 'location' => 'Sumatera Utara, Indonesia', 'rating' => '4.6'],
+            [
+            'name' => 'Bali',
+            'location' => 'Indonesia',
+            'rating' => 4.8,
+            'route' => 'bali'
+            ],
+            [
+            'name' => 'Raja Ampat',
+            'location' => 'Indonesia',
+            'rating' => 4.9,
+            'route' => 'raja-ampat'
+            ],
+            [
+            'name' => 'Paris',
+            'location' => 'Prancis',
+            'rating' => 4.9,
+            'route' => 'paris'
+            ],
+            [
+            'name' => 'Tokyo',
+            'location' => 'Jepang',
+            'rating' => 4.9,
+            'route' => 'tokyo'
+            ]
             ];
             @endphp
 
@@ -172,7 +192,7 @@
                         {{ $destination['location'] }}
                     </p>
 
-                    <a href="{{ route('bali') }}"
+                    <a href="{{ route($destination['route']) }}"
                         class="mt-4 block w-full py-2.5 rounded-xl bg-[#0F172A] text-white text-sm font-semibold text-center hover:bg-[#1E3A8A] transition">
                         View Details
                     </a>
