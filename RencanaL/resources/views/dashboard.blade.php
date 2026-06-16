@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
 
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sky-100/80">
                     <a href="#" class="text-white border-b-2 border-[#38BDF8] pb-1">Dashboard</a>
-                    <a href="#" class="hover:text-white transition-colors duration-200">Destinasi</a>
+                    <a href="#destinations" class="hover:text-white transition-colors duration-200">Destinasi</a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Wishlist</a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
@@ -66,11 +66,13 @@
             <p class="text-sky-100/80 mt-4 max-w-xl text-sm md:text-base">
                 Jelajahi destinasi impianmu, susun rencana perjalanan, dan wujudkan liburan terbaik bersama RencanaLiburan.
             </p>
-            <button class="mt-7 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200">
+            <a href="#destinations"
+                class="mt-7 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200">
                 Explore Destinations
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
-                </svg>
+            </a>
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
+            </svg>
             </button>
         </div>
     </section>
@@ -123,7 +125,7 @@
     </section>
 
     <!-- Featured Destinations -->
-    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <section id="destinations" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
         <div class="flex items-end justify-between mb-8">
             <div>
                 <h2 class="text-2xl md:text-3xl font-bold text-[#0F172A]">Featured Destinations</h2>
@@ -142,25 +144,29 @@
             'name' => 'Bali',
             'location' => 'Indonesia',
             'rating' => 4.8,
-            'route' => 'bali'
+            'route' => 'bali',
+            'image' => 'images/bali.jpg'
             ],
             [
             'name' => 'Raja Ampat',
             'location' => 'Indonesia',
             'rating' => 4.9,
-            'route' => 'raja-ampat'
+            'route' => 'raja-ampat',
+            'image' => 'images/raja-ampat.jpg'
             ],
             [
             'name' => 'Paris',
             'location' => 'Prancis',
             'rating' => 4.9,
-            'route' => 'paris'
+            'route' => 'paris',
+            'image' => 'images/paris.jpg'
             ],
             [
             'name' => 'Tokyo',
             'location' => 'Jepang',
             'rating' => 4.9,
-            'route' => 'tokyo'
+            'route' => 'tokyo',
+            'image' => 'images/tokyo.jpg'
             ]
             ];
             @endphp
@@ -169,13 +175,14 @@
             <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
 
                 <!-- Image placeholder -->
-                <div class="relative h-44 bg-gradient-to-br from-[#1E3A8A] to-[#38BDF8] flex items-center justify-center overflow-hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-14 h-14 text-white/40 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 16l5-5 4 4 5-6 4 5" />
-                        <circle cx="8" cy="8" r="2" />
-                    </svg>
+                <div class="relative h-44 overflow-hidden">
+                    <img
+                        <img
+                        src="{{ asset($destination['image']) }}"
+                        alt="{{ $destination['name'] }}"
+                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                     <span class="absolute top-3 right-3 bg-white/90 text-[#0F172A] text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
-                        &#9733; {{ $destination['rating'] }}
+                        ★ {{ $destination['rating'] }}
                     </span>
                 </div>
 
