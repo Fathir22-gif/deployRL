@@ -150,7 +150,7 @@
             [
             'name' => 'Raja Ampat',
             'location' => 'Indonesia',
-            'rating' => 4.9,
+            'rating' => 4.8,
             'route' => 'raja-ampat',
             'image' => 'images/raja-ampat.jpg'
             ],

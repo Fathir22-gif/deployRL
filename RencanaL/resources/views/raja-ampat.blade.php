@@ -46,12 +46,10 @@
 
     <!-- Hero Image Section -->
     <section class="relative h-[60vh] md:h-[70vh] bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] overflow-hidden">
-        <div class="absolute inset-0 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2 18l6-7 5 5 4-6 5 6" />
-                <circle cx="9" cy="7" r="2.5" />
-            </svg>
-        </div>
+        <img
+            src="{{ asset('images/raja-ampat.jpg') }}"
+            alt="Raja Ampat"
+            class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent"></div>
 
         <div class="absolute bottom-0 left-0 w-full px-4 sm:px-6 lg:px-8 pb-10">
@@ -80,7 +78,7 @@
                             &#9733; 4.8<span class="text-slate-400 font-normal">/5</span>
                         </span>
                         <span class="inline-flex items-center gap-1.5 bg-[#38BDF8] text-[#0F172A] font-semibold text-sm px-4 py-2 rounded-xl shadow-lg">
-                            Rp 3.500.000
+                            Rp 7.500.000
                         </span>
                     </div>
                 </div>
@@ -99,16 +97,16 @@
                 <section>
                     <h2 class="text-2xl font-bold text-[#0F172A] mb-4">Tentang Raja Ampat</h2>
                     <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                        Bali merupakan salah satu destinasi wisata paling populer di Indonesia, dikenal dengan julukan
-                        "Pulau Dewata" karena kekayaan budaya dan spiritualnya. Pulau ini menawarkan perpaduan sempurna
-                        antara keindahan alam, mulai dari pantai berpasir putih seperti Kuta dan Seminyak, hingga tebing
-                        dramatis di Uluwatu dan sawah berundak hijau di Ubud. Budaya Hindu Bali sangat kental terasa
-                        melalui ribuan pura yang tersebar di seluruh pulau, upacara adat yang masih dilestarikan, serta
-                        tarian tradisional seperti Tari Kecak dan Tari Barong. Bagi pecinta kuliner, Bali menawarkan
-                        ragam hidangan khas seperti Babi Guling, Sate Lilit, Lawar, dan Nasi Campur Bali yang kaya rempah.
-                        Dengan suasana yang ramah wisatawan, fasilitas wisata kelas dunia, serta pemandangan matahari
-                        terbenam yang memukau, Bali menjadi destinasi sempurna baik untuk liburan keluarga, bulan madu,
-                        maupun petualangan solo.
+                        Raja Ampat merupakan surga bahari yang terletak di Papua Barat Daya,
+                        Indonesia. Destinasi ini terkenal dengan gugusan pulau-pulau eksotis,
+                        air laut yang jernih, serta keanekaragaman hayati bawah laut terbaik di
+                        dunia. Raja Ampat menjadi tujuan favorit bagi penyelam dan pecinta alam
+                        karena memiliki terumbu karang yang masih sangat alami serta ribuan
+                        spesies ikan laut. Selain keindahan bawah lautnya, wisatawan juga dapat
+                        menikmati panorama Pulau Piaynemo, Wayag, Pasir Timbul, dan desa-desa
+                        wisata yang menawarkan pengalaman budaya khas Papua. Raja Ampat cocok
+                        bagi wisatawan yang mencari petualangan, ketenangan, dan keindahan alam
+                        yang belum banyak tersentuh.
                     </p>
                 </section>
 
@@ -119,19 +117,36 @@
 
                         @php
                         $attractions = [
-                        ['name' => 'Tanah Lot', 'desc' => 'Pura ikonik di atas batu karang dengan panorama matahari terbenam terbaik.'],
-                        ['name' => 'Uluwatu Temple', 'desc' => 'Pura megah di tepi tebing dengan pertunjukan Tari Kecak setiap sore.'],
-                        ['name' => 'Kuta Beach', 'desc' => 'Pantai legendaris dengan ombak ideal untuk berselancar dan bersantai.'],
-                        ['name' => 'Nusa Penida', 'desc' => 'Pulau eksotis dengan tebing dramatis dan air laut sebiru kristal.'],
+                        [
+                        'name' => 'Pulau Wayag',
+                        'desc' => 'Ikon Raja Ampat yang terkenal dengan gugusan pulau karst dan panorama laut biru dari puncak bukit.',
+                        'image' => 'images/raja-gallery/pulauwayag.jpg'
+                        ],
+                        [
+                        'name' => 'Telaga Bintang',
+                        'desc' => 'Laguna berbentuk bintang yang menawarkan pemandangan unik dan menjadi spot foto favorit wisatawan.',
+                        'image' => 'images/raja-gallery/telagabintang.jpg'
+                        ],
+                        [
+                        'name' => 'Manta Sandy',
+                        'desc' => 'Lokasi snorkeling dan diving terbaik untuk melihat ikan pari manta berenang di habitat alaminya.',
+                        'image' => 'images/raja-gallery/mantasandy.jpg'
+                        ],
+                        [
+                        'name' => 'Kali Biru',
+                        'desc' => 'Sungai dengan air sebening kristal berwarna biru kehijauan yang dikelilingi hutan tropis alami.',
+                        'image' => 'images/raja-gallery/kalibiru.jpg'
+                        ],
                         ];
                         @endphp
 
                         @foreach ($attractions as $attraction)
                         <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div class="h-32 bg-gradient-to-br from-[#1E3A8A] to-[#38BDF8] flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white/50 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 9h6m-6 4h6m-6 4h6" />
-                                </svg>
+                            <div class="h-48 overflow-hidden">
+                                <img
+                                    src="{{ asset($attraction['image']) }}"
+                                    alt="{{ $attraction['name'] }}"
+                                    class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h3 class="font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors duration-200">
@@ -147,85 +162,111 @@
 
                 <!-- Photo Gallery -->
                 <section>
-                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Galeri Foto</h2>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        @for ($i = 1; $i <= 6; $i++)
-                            <div class="group aspect-square rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] flex items-center justify-center shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white/40 group-hover:text-white/60 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 15l-5-5L5 21" />
-                            </svg>
-                    </div>
-                    @endfor
-            </div>
-            </section>
-
-            <!-- Testimonials -->
-            <section>
-                <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">
+                        Galeri Foto
+                    </h2>
 
                     @php
-                    $testimonials = [
-                    ['name' => 'Dewi Anggraini', 'text' => 'Liburan paling berkesan! Pantainya indah dan budayanya sangat kental. Pasti akan kembali lagi ke Bali.'],
-                    ['name' => 'Reza Pratama', 'text' => 'Uluwatu Temple saat sunset benar-benar luar biasa. Pelayanan dan fasilitas wisata di Bali sangat profesional.'],
-                    ['name' => 'Maya Putri', 'text' => 'Nusa Penida adalah tempat tercantik yang pernah saya kunjungi. Sangat direkomendasikan untuk pecinta alam.'],
+                    $gallery = [
+                    'images/raja-gallery/raja1.jpg',
+                    'images/raja-gallery/raja2.jpg',
+                    'images/raja-gallery/raja3.jpg',
+                    'images/raja-gallery/raja4.jpg',
+                    'images/raja-gallery/raja5.jpg',
+                    'images/raja-gallery/raja6.jpg',
                     ];
                     @endphp
 
-                    @foreach ($testimonials as $testimonial)
-                    <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
-                                {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
-                            </div>
-                            <div>
-                                <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
-                                <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                            </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+                        @foreach($gallery as $image)
+                        <div class="overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+
+                            <img
+                                src="{{ asset($image) }}"
+                                alt="Bali"
+                                class="w-full aspect-square object-cover hover:scale-110 transition duration-500">
+
                         </div>
-                        <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
+                        @endforeach
+
                     </div>
-                    @endforeach
+                </section>
 
-                </div>
-            </section>
+                <!-- Testimonials -->
+                <section>
+                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
-        </div>
+                        @php
+                        $testimonials = [
+                        [
+                        'name' => 'Andi Saputra',
+                        'text' => 'Pulau Wayag benar-benar luar biasa. Pemandangan dari atas bukit membuat saya takjub dan ingin kembali lagi.'
+                        ],
+                        [
+                        'name' => 'Nadia Putri',
+                        'text' => 'Snorkeling di Manta Sandy menjadi pengalaman terbaik selama liburan. Saya bisa melihat pari manta secara langsung.'
+                        ],
+                        [
+                        'name' => 'Rizky Mahendra',
+                        'text' => 'Telaga Bintang dan Kali Biru sangat indah. Alam Raja Ampat masih sangat terjaga dan bersih.'
+                        ],
+                        ];
+                        @endphp
 
-        <!-- Right Column / Sidebar -->
-        <aside class="lg:col-span-1">
-            <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
-                <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
+                        @foreach ($testimonials as $testimonial)
+                        <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
+                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
+                                    <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
+                        </div>
+                        @endforeach
 
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Lokasi</span>
-                        <span class="font-semibold text-[#0F172A]">Raja Ampat, Indonesia</span>
                     </div>
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Rating</span>
-                        <span class="font-semibold text-[#0F172A]">&#9733; 4.8/5</span>
-                    </div>
-                    <div class="flex items-center justify-between pb-1">
-                        <span class="text-slate-500">Estimasi Budget</span>
-                        <span class="font-semibold text-[#0F172A]">Rp 3.500.000</span>
-                    </div>
-                </div>
+                </section>
 
-                <button class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
-                    </svg>
-                    Add to Wishlist
-                </button>
-
-                <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
-                    Back to Dashboard
-                </button>
             </div>
-        </aside>
+
+            <!-- Right Column / Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
+                    <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <span class="text-slate-500">Lokasi</span>
+                            <span class="font-semibold text-[#0F172A]">Raja Ampat, Indonesia</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <span class="text-slate-500">Rating</span>
+                            <span class="font-semibold text-[#0F172A]">&#9733; 4.9/5</span>
+                        </div>
+                        <div class="flex items-center justify-between pb-1">
+                            <span class="text-slate-500">Estimasi Budget</span>
+                            <span class="font-semibold text-[#0F172A]">Rp 3.500.000</span>
+                        </div>
+                    </div>
+
+                    <button class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
+                        </svg>
+                        Add to Wishlist
+                    </button>
+
+                    <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
+                        Back to Dashboard
+                    </button>
+                </div>
+            </aside>
 
         </div>
     </main>
