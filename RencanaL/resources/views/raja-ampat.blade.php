@@ -12,6 +12,26 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+
+        @keyframes heartPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .wishlist-btn:hover .wishlist-heart {
+            animation: heartPop 0.4s ease-in-out;
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
     </style>
 </head>
 
@@ -33,7 +53,9 @@
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sky-100/80">
                     <a href="{{ url('/dashboard') }}" class="hover:text-white transition-colors duration-200">Dashboard</a>
                     <a href="#" class="text-white border-b-2 border-[#38BDF8] pb-1">Destinasi</a>
-                    <a href="#" class="hover:text-white transition-colors duration-200">Wishlist</a>
+                    <a href="{{ route('wishlist') }}" class="hover:text-white transition-colors duration-200">
+                        Wishlist
+                    </a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
 
@@ -255,12 +277,33 @@
                         </div>
                     </div>
 
-                    <button class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
-                        </svg>
-                        Add to Wishlist
-                    </button>
+                    <form action="{{ route('wishlist.add') }}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="name" value="Raja Ampat">
+                        <input type="hidden" name="country" value="Indonesia">
+                        <input type="hidden" name="rating" value="4.9">
+                        <input type="hidden" name="budget" value="Rp 7.500.000">
+                        <input type="hidden" name="description" value="Surga bawah laut Indonesia">
+                        <input type="hidden" name="route" value="raja-ampat">
+
+                        <button
+                            type="submit"
+                            class="wishlist-btn w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-sky-400/40 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="wishlist-heart w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
+                            </svg>
+
+                            <span>Add to Wishlist</span>
+                        </button>
+                    </form>
 
                     <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
                         Back to Dashboard

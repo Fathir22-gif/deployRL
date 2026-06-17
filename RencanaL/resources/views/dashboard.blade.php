@@ -33,7 +33,7 @@
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sky-100/80">
                     <a href="#" class="text-white border-b-2 border-[#38BDF8] pb-1">Dashboard</a>
                     <a href="#destinations" class="hover:text-white transition-colors duration-200">Destinasi</a>
-                    <a href="#" class="hover:text-white transition-colors duration-200">Wishlist</a>
+                    <a href="{{ route('wishlist') }}" class="hover:text-white transition-colors duration-200">Wishlist</a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
 
@@ -234,7 +234,7 @@
                         <li><a href="{{ route('dashboard') }}#destinations" class="hover:text-white transition-colors duration-200">
                                 Destinasi
                             </a></li>
-                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
+                        <li><a href="{{ url('/wishlist') }}" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Trip Saya</a></li>
                     </ul>
                 </div>

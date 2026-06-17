@@ -6,6 +6,8 @@ use App\Http\Controllers\BaliController;
 use App\Http\Controllers\RajaAmpatController;
 use App\Http\Controllers\ParisController;
 use App\Http\Controllers\TokyoController;
+use App\Http\Controllers\WishlistController;
+
 
 
 Route::redirect('/', '/login');
@@ -28,6 +30,25 @@ Route::get('/paris', [ParisController::class, 'index'])
 Route::get('/tokyo', [TokyoController::class, 'index'])
     ->middleware('auth')
     ->name('tokyo');
+
+Route::get('/wishlist', [WishlistController::class, 'index'])
+    ->middleware('auth')
+    ->name('wishlist');
+
+Route::post('/wishlist/add', [WishlistController::class, 'add'])
+    ->middleware('auth')
+    ->name('wishlist.add');
+
+Route::delete(
+    '/wishlist/remove/{index}',
+    [WishlistController::class, 'remove']
+)
+    ->name('wishlist.remove');
+
+Route::get('/clear-wishlist', function () {
+    session()->forget('wishlist');
+    return 'Wishlist berhasil dihapus';
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
