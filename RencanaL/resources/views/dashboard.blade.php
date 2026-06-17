@@ -231,7 +231,9 @@
                     <h4 class="text-white font-semibold mb-3 text-sm">Navigasi</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Dashboard</a></li>
-                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Destinasi</a></li>
+                        <li><a href="{{ route('dashboard') }}#destinations" class="hover:text-white transition-colors duration-200">
+                                Destinasi
+                            </a></li>
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Trip Saya</a></li>
                     </ul>
