@@ -1,19 +1,39 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\WishlistController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BaliController;
 use App\Http\Controllers\RajaAmpatController;
 use App\Http\Controllers\ParisController;
 use App\Http\Controllers\TokyoController;
-use App\Http\Controllers\WishlistController;
-
 
 
 Route::redirect('/', '/login');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/destinations/search', function (Request $request) {
+    $q = trim($request->query('q', ''));
+
+    $destinations = collect([
+        ['name' => 'Bali', 'location' => 'Indonesia', 'rating' => 4.8, 'route' => 'bali', 'image' => 'images/bali.jpg'],
+        ['name' => 'Raja Ampat', 'location' => 'Indonesia', 'rating' => 4.9, 'route' => 'raja-ampat', 'image' => 'images/raja-ampat.jpg'],
+        ['name' => 'Paris', 'location' => 'Prancis', 'rating' => 4.9, 'route' => 'paris', 'image' => 'images/paris.jpg'],
+        ['name' => 'Tokyo', 'location' => 'Jepang', 'rating' => 4.9, 'route' => 'tokyo', 'image' => 'images/tokyo.jpg'],
+    ]);
+
+    $results = $q === ''
+        ? $destinations
+        : $destinations->filter(fn ($destination) => str_contains(strtolower($destination['name']), strtolower($q)) || str_contains(strtolower($destination['location']), strtolower($q)))->values();
+
+    return view('dashboard', [
+        'q' => $q,
+        'results' => $results,
+    ]);
+})->middleware(['auth', 'verified'])->name('destinations.search');
 
 Route::get('/bali', [BaliController::class, 'index'])
     ->middleware('auth')
@@ -39,16 +59,9 @@ Route::post('/wishlist/add', [WishlistController::class, 'add'])
     ->middleware('auth')
     ->name('wishlist.add');
 
-Route::delete(
-    '/wishlist/remove/{index}',
-    [WishlistController::class, 'remove']
-)
+Route::delete('/wishlist/{route}', [WishlistController::class, 'remove'])
+    ->middleware('auth')
     ->name('wishlist.remove');
-
-Route::get('/clear-wishlist', function () {
-    session()->forget('wishlist');
-    return 'Wishlist berhasil dihapus';
-});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

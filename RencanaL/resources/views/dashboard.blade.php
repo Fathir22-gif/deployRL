@@ -66,14 +66,45 @@
             <p class="text-sky-100/80 mt-4 max-w-xl text-sm md:text-base">
                 Jelajahi destinasi impianmu, susun rencana perjalanan, dan wujudkan liburan terbaik bersama RencanaLiburan.
             </p>
+            <!-- Search Bar -->
+            <div class="mt-8 max-w-xl">
+                <form action="{{ route('destinations.search') }}" method="GET">
+                    <div class="flex items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden shadow-xl focus-within:ring-2 focus-within:ring-[#38BDF8] transition-all duration-200">
+                        <div class="pl-5 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-sky-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="11" cy="11" r="8" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35" />
+                            </svg>
+                        </div>
+                        <input
+                            type="text"
+                            name="q"
+                            placeholder="Cari destinasi, kota, atau negara..."
+                            value="{{ old('q', $q ?? request('q')) }}"
+                            class="flex-1 bg-transparent text-white placeholder-sky-200/60 text-sm px-4 py-4 outline-none"
+                        />
+                        <button
+                            type="submit"
+                            class="m-2 px-5 py-2.5 bg-[#38BDF8] hover:bg-sky-400 active:scale-95 text-[#0F172A] font-semibold text-sm rounded-xl transition-all duration-200 flex-shrink-0">
+                            Cari
+                        </button>
+                    </div>
+                </form>
+                @if(isset($q) && $q !== '')
+                    <div class="mt-4 max-w-xl rounded-3xl bg-white/10 border border-white/20 p-4 text-slate-100 shadow-lg">
+                        <p class="text-sm">Hasil pencarian untuk <span class="font-semibold text-white">"{{ $q }}"</span></p>
+                        <p class="text-xs text-slate-300 mt-1">{{ $results->count() }} destinasi ditemukan.</p>
+                    </div>
+                @endif
+            </div>
+
             <a href="#destinations"
-                class="mt-7 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200">
+                class="mt-6 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200">
                 Explore Destinations
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
+                </svg>
             </a>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
-            </svg>
-            </button>
         </div>
     </section>
 
@@ -136,48 +167,53 @@
             </a>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            @php
-            $destinations = [
-            [
-            'name' => 'Bali',
-            'location' => 'Indonesia',
-            'rating' => 4.8,
-            'route' => 'bali',
-            'image' => 'images/bali.jpg'
-            ],
-            [
-            'name' => 'Raja Ampat',
-            'location' => 'Indonesia',
-            'rating' => 4.8,
-            'route' => 'raja-ampat',
-            'image' => 'images/raja-ampat.jpg'
-            ],
-            [
-            'name' => 'Paris',
-            'location' => 'Prancis',
-            'rating' => 4.9,
-            'route' => 'paris',
-            'image' => 'images/paris.jpg'
-            ],
-            [
-            'name' => 'Tokyo',
-            'location' => 'Jepang',
-            'rating' => 4.9,
-            'route' => 'tokyo',
-            'image' => 'images/tokyo.jpg'
-            ]
+        @php
+            $destinations = $results ?? [
+                [
+                    'name' => 'Bali',
+                    'location' => 'Indonesia',
+                    'rating' => 4.8,
+                    'route' => 'bali',
+                    'image' => 'images/bali.jpg'
+                ],
+                [
+                    'name' => 'Raja Ampat',
+                    'location' => 'Indonesia',
+                    'rating' => 4.9,
+                    'route' => 'raja-ampat',
+                    'image' => 'images/raja-ampat.jpg'
+                ],
+                [
+                    'name' => 'Paris',
+                    'location' => 'Prancis',
+                    'rating' => 4.9,
+                    'route' => 'paris',
+                    'image' => 'images/paris.jpg'
+                ],
+                [
+                    'name' => 'Tokyo',
+                    'location' => 'Jepang',
+                    'rating' => 4.9,
+                    'route' => 'tokyo',
+                    'image' => 'images/tokyo.jpg'
+                ]
             ];
-            @endphp
+        @endphp
 
-            @foreach ($destinations as $destination)
+        @if(isset($q) && $q !== '' && empty($destinations))
+            <div class="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 shadow-sm">
+                <p class="text-lg font-semibold text-[#0F172A] mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
+                <p class="text-sm">Coba kata kunci lain atau kembali melihat semua destinasi.</p>
+            </div>
+        @else
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                @foreach ($destinations as $destination)
             <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
 
                 <!-- Image placeholder -->
                 <div class="relative h-44 overflow-hidden">
                     <img
-                        <img
                         src="{{ asset($destination['image']) }}"
                         alt="{{ $destination['name'] }}"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
@@ -208,6 +244,7 @@
             @endforeach
 
         </div>
+        @endif
     </section>
 
     <!-- Footer -->
@@ -231,10 +268,8 @@
                     <h4 class="text-white font-semibold mb-3 text-sm">Navigasi</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Dashboard</a></li>
-                        <li><a href="{{ route('dashboard') }}#destinations" class="hover:text-white transition-colors duration-200">
-                                Destinasi
-                            </a></li>
-                        <li><a href="{{ url('/wishlist') }}" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
+                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Destinasi</a></li>
+                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Trip Saya</a></li>
                     </ul>
                 </div>

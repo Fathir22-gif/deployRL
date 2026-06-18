@@ -12,26 +12,6 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-
-        @keyframes heartPop {
-            0% {
-                transform: scale(1);
-            }
-
-            50% {
-                transform: scale(1.4);
-            }
-
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .wishlist-btn:hover .wishlist-heart {
-            animation: heartPop 0.4s ease-in-out;
-            fill: #ef4444;
-            stroke: #ef4444;
-        }
     </style>
 </head>
 
@@ -53,9 +33,7 @@
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sky-100/80">
                     <a href="{{ url('/dashboard') }}" class="hover:text-white transition-colors duration-200">Dashboard</a>
                     <a href="#" class="text-white border-b-2 border-[#38BDF8] pb-1">Destinasi</a>
-                    <a href="{{ route('wishlist') }}" class="hover:text-white transition-colors duration-200">
-                        Wishlist
-                    </a>
+                    <a href="{{ route('wishlist') }}" class="hover:text-white transition-colors duration-200">Wishlist</a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
 
@@ -68,10 +46,12 @@
 
     <!-- Hero Image Section -->
     <section class="relative h-[60vh] md:h-[70vh] bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] overflow-hidden">
-        <img
-            src="{{ asset('images/raja-ampat.jpg') }}"
-            alt="Raja Ampat"
-            class="absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2 18l6-7 5 5 4-6 5 6" />
+                <circle cx="9" cy="7" r="2.5" />
+            </svg>
+        </div>
         <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent"></div>
 
         <div class="absolute bottom-0 left-0 w-full px-4 sm:px-6 lg:px-8 pb-10">
@@ -100,7 +80,7 @@
                             &#9733; 4.8<span class="text-slate-400 font-normal">/5</span>
                         </span>
                         <span class="inline-flex items-center gap-1.5 bg-[#38BDF8] text-[#0F172A] font-semibold text-sm px-4 py-2 rounded-xl shadow-lg">
-                            Rp 7.500.000
+                            Rp 3.500.000
                         </span>
                     </div>
                 </div>
@@ -119,16 +99,13 @@
                 <section>
                     <h2 class="text-2xl font-bold text-[#0F172A] mb-4">Tentang Raja Ampat</h2>
                     <p class="text-slate-600 leading-relaxed text-sm md:text-base">
-                        Raja Ampat merupakan surga bahari yang terletak di Papua Barat Daya,
-                        Indonesia. Destinasi ini terkenal dengan gugusan pulau-pulau eksotis,
-                        air laut yang jernih, serta keanekaragaman hayati bawah laut terbaik di
-                        dunia. Raja Ampat menjadi tujuan favorit bagi penyelam dan pecinta alam
-                        karena memiliki terumbu karang yang masih sangat alami serta ribuan
-                        spesies ikan laut. Selain keindahan bawah lautnya, wisatawan juga dapat
-                        menikmati panorama Pulau Piaynemo, Wayag, Pasir Timbul, dan desa-desa
-                        wisata yang menawarkan pengalaman budaya khas Papua. Raja Ampat cocok
-                        bagi wisatawan yang mencari petualangan, ketenangan, dan keindahan alam
-                        yang belum banyak tersentuh.
+                        Raja Ampat adalah surga bawah laut di Papua Barat, Indonesia, terkenal dengan keanekaragaman
+                        hayati laut yang luar biasa dan pemandangan pulau-pulau karst yang spektakuler. Kawasan ini menjadi
+                        destinasi impian bagi penyelam dan pecinta alam, dengan terumbu karang yang masih terjaga, ikan-ikan
+                        tropis berwarna-warni, serta pantai pasir putih yang tenang. Raja Ampat juga populer untuk snorkeling,
+                        island hopping, dan trekking ringan ke bukit-bukit hijau yang menawarkan panorama laut luas.
+                        Suasana alamnya yang damai membuat Raja Ampat cocok untuk liburan petualangan, relaksasi, dan
+                        pengalaman ekowisata yang tak terlupakan.
                     </p>
                 </section>
 
@@ -139,36 +116,19 @@
 
                         @php
                         $attractions = [
-                        [
-                        'name' => 'Pulau Wayag',
-                        'desc' => 'Ikon Raja Ampat yang terkenal dengan gugusan pulau karst dan panorama laut biru dari puncak bukit.',
-                        'image' => 'images/raja-gallery/pulauwayag.jpg'
-                        ],
-                        [
-                        'name' => 'Telaga Bintang',
-                        'desc' => 'Laguna berbentuk bintang yang menawarkan pemandangan unik dan menjadi spot foto favorit wisatawan.',
-                        'image' => 'images/raja-gallery/telagabintang.jpg'
-                        ],
-                        [
-                        'name' => 'Manta Sandy',
-                        'desc' => 'Lokasi snorkeling dan diving terbaik untuk melihat ikan pari manta berenang di habitat alaminya.',
-                        'image' => 'images/raja-gallery/mantasandy.jpg'
-                        ],
-                        [
-                        'name' => 'Kali Biru',
-                        'desc' => 'Sungai dengan air sebening kristal berwarna biru kehijauan yang dikelilingi hutan tropis alami.',
-                        'image' => 'images/raja-gallery/kalibiru.jpg'
-                        ],
+                        ['name' => 'Wayag', 'desc' => 'Kepulauan karst dramatis dengan panorama pulau-pulau dan laguna biru.'],
+                        ['name' => 'Pulau Misool', 'desc' => 'Lokasi snorkeling dengan formasi karang dan gua bawah laut yang menakjubkan.'],
+                        ['name' => 'Cape Kri', 'desc' => 'Salah satu spot menyelam terbaik di dunia dengan keanekaragaman laut tinggi.'],
+                        ['name' => 'Piaynemo', 'desc' => 'Puncak bukit yang menawarkan pemandangan panorama pulau karst yang ikonik.'],
                         ];
                         @endphp
 
                         @foreach ($attractions as $attraction)
                         <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div class="h-48 overflow-hidden">
-                                <img
-                                    src="{{ asset($attraction['image']) }}"
-                                    alt="{{ $attraction['name'] }}"
-                                    class="w-full h-full object-cover">
+                            <div class="h-32 bg-gradient-to-br from-[#1E3A8A] to-[#38BDF8] flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white/50 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 9h6m-6 4h6m-6 4h6" />
+                                </svg>
                             </div>
                             <div class="p-4">
                                 <h3 class="font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors duration-200">
@@ -184,132 +144,85 @@
 
                 <!-- Photo Gallery -->
                 <section>
-                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">
-                        Galeri Foto
-                    </h2>
+                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Galeri Foto</h2>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        @for ($i = 1; $i <= 6; $i++)
+                            <div class="group aspect-square rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] flex items-center justify-center shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white/40 group-hover:text-white/60 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 15l-5-5L5 21" />
+                            </svg>
+                    </div>
+                    @endfor
+            </div>
+            </section>
+
+            <!-- Testimonials -->
+            <section>
+                <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
                     @php
-                    $gallery = [
-                    'images/raja-gallery/raja1.jpg',
-                    'images/raja-gallery/raja2.jpg',
-                    'images/raja-gallery/raja3.jpg',
-                    'images/raja-gallery/raja4.jpg',
-                    'images/raja-gallery/raja5.jpg',
-                    'images/raja-gallery/raja6.jpg',
+                    $testimonials = [
+                    ['name' => 'Dewi Anggraini', 'text' => 'Pengalaman snorkeling di Raja Ampat luar biasa. Warna laut dan terumbu karangnya sangat mempesona.'],
+                    ['name' => 'Reza Pratama', 'text' => 'Wayag dan Piaynemo memberikan pemandangan yang benar-benar spektakuler. Alamnya masih sangat murni.'],
+                    ['name' => 'Maya Putri', 'text' => 'Raja Ampat adalah surga bagi penyelam. Suara lautan dan pulau-pulaunya membuat liburan sangat tenang.'],
                     ];
                     @endphp
 
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-
-                        @foreach($gallery as $image)
-                        <div class="overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
-
-                            <img
-                                src="{{ asset($image) }}"
-                                alt="Bali"
-                                class="w-full aspect-square object-cover hover:scale-110 transition duration-500">
-
-                        </div>
-                        @endforeach
-
-                    </div>
-                </section>
-
-                <!-- Testimonials -->
-                <section>
-                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
-
-                        @php
-                        $testimonials = [
-                        [
-                        'name' => 'Andi Saputra',
-                        'text' => 'Pulau Wayag benar-benar luar biasa. Pemandangan dari atas bukit membuat saya takjub dan ingin kembali lagi.'
-                        ],
-                        [
-                        'name' => 'Nadia Putri',
-                        'text' => 'Snorkeling di Manta Sandy menjadi pengalaman terbaik selama liburan. Saya bisa melihat pari manta secara langsung.'
-                        ],
-                        [
-                        'name' => 'Rizky Mahendra',
-                        'text' => 'Telaga Bintang dan Kali Biru sangat indah. Alam Raja Ampat masih sangat terjaga dan bersih.'
-                        ],
-                        ];
-                        @endphp
-
-                        @foreach ($testimonials as $testimonial)
-                        <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
-                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
-                                    <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                                </div>
+                    @foreach ($testimonials as $testimonial)
+                    <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
+                                {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
                             </div>
-                            <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
+                            <div>
+                                <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
+                                <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                            </div>
                         </div>
-                        @endforeach
-
+                        <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
                     </div>
-                </section>
+                    @endforeach
 
-            </div>
-
-            <!-- Right Column / Sidebar -->
-            <aside class="lg:col-span-1">
-                <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
-                    <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
-
-                    <div class="space-y-3 text-sm">
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-slate-500">Lokasi</span>
-                            <span class="font-semibold text-[#0F172A]">Raja Ampat, Indonesia</span>
-                        </div>
-                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                            <span class="text-slate-500">Rating</span>
-                            <span class="font-semibold text-[#0F172A]">&#9733; 4.9/5</span>
-                        </div>
-                        <div class="flex items-center justify-between pb-1">
-                            <span class="text-slate-500">Estimasi Budget</span>
-                            <span class="font-semibold text-[#0F172A]">Rp 3.500.000</span>
-                        </div>
-                    </div>
-
-                    <form action="{{ route('wishlist.add') }}" method="POST">
-                        @csrf
-
-                        <input type="hidden" name="name" value="Raja Ampat">
-                        <input type="hidden" name="country" value="Indonesia">
-                        <input type="hidden" name="rating" value="4.9">
-                        <input type="hidden" name="budget" value="Rp 7.500.000">
-                        <input type="hidden" name="description" value="Surga bawah laut Indonesia">
-                        <input type="hidden" name="route" value="raja-ampat">
-
-                        <button
-                            type="submit"
-                            class="wishlist-btn w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-sky-400/40 hover:-translate-y-0.5 hover:scale-[1.01] active:scale-95 transition-all duration-300 flex items-center justify-center gap-2">
-                            <svg xmlns="http://www.w3.org/2000/svg"
-                                class="wishlist-heart w-5 h-5"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.8">
-                                <path stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
-                            </svg>
-
-                            <span>Add to Wishlist</span>
-                        </button>
-                    </form>
-
-                    <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
-                        Back to Dashboard
-                    </button>
                 </div>
-            </aside>
+            </section>
+
+        </div>
+
+        <!-- Right Column / Sidebar -->
+        <aside class="lg:col-span-1">
+            <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
+                <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
+
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Lokasi</span>
+                        <span class="font-semibold text-[#0F172A]">Raja Ampat, Indonesia</span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                        <span class="text-slate-500">Rating</span>
+                        <span class="font-semibold text-[#0F172A]">&#9733; 4.8/5</span>
+                    </div>
+                    <div class="flex items-center justify-between pb-1">
+                        <span class="text-slate-500">Estimasi Budget</span>
+                        <span class="font-semibold text-[#0F172A]">Rp 3.500.000</span>
+                    </div>
+                </div>
+
+                <button class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
+                    </svg>
+                    Add to Wishlist
+                </button>
+
+                <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
+                    Back to Dashboard
+                </button>
+            </div>
+        </aside>
 
         </div>
     </main>
