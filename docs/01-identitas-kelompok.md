@@ -26,14 +26,14 @@
 - Nama Lengkap: `Qiyami Puji Syarifah Z`
 - NIM: `230705034`
 - Role: `Front-End`
-- Teknologi: `React, VS Code, Figma`
+- Teknologi: `Blade, VS Code, Figma`
 
 **Anggota 3**
 
 - Nama Lengkap: `Ahzra Nurna Hasanta`
 - NIM: `230705054`
 - Role: `Dev-Ops`
-- Teknologi: `Github`
+- Teknologi: `Github, Vs Code`
 
 ---
 
