@@ -200,7 +200,7 @@
             ];
         @endphp
 
-        @if(isset($q) && $q !== '' && $destinations->isEmpty())
+        @if(isset($q) && $q !== '' && empty($destinations))
             <div class="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 shadow-sm">
                 <p class="text-lg font-semibold text-[#0F172A] mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
                 <p class="text-sm">Coba kata kunci lain atau kembali melihat semua destinasi.</p>

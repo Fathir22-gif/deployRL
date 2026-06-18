@@ -1,45 +1,17 @@
 <?php
 
-namespace App\Services;
+namespace App\Contracts;
 
-use App\Contracts\SearchServiceContract;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Pagination\Paginator;
 
-class SearchService implements SearchServiceContract
+interface SearchServiceContract
 {
-    public function search(array $filters): LengthAwarePaginator
-    {
-        return new LengthAwarePaginator([], 0, 10);
-    }
+    public function search(array $filters): LengthAwarePaginator;
 
-    public function autocomplete(string $query): Collection
-    {
-        return collect([
-            [
-                'label' => 'Bali',
-                'place_id' => null,
-                'source' => 'database',
-            ]
-        ]);
-    }
+    public function autocomplete(string $query): Collection;
 
-    public function getPlaceDetails(string $placeId): array
-    {
-        return [
-            'name' => 'Pantai Kuta',
-            'city' => 'Bali',
-        ];
-    }
+    public function getPlaceDetails(string $placeId): array;
 
-    public function searchAmadeusOffers(array $params): Collection
-    {
-        return collect([
-            [
-                'hotel' => 'Hotel Example',
-                'price' => 500000,
-            ]
-        ]);
-    }
+    public function searchAmadeusOffers(array $params): Collection;
 }

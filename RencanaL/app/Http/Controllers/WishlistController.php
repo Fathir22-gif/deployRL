@@ -3,18 +3,26 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Collection;
 
 class WishlistController extends Controller
 {
     public function index()
     {
-        $wishlistItems = session('wishlist', []);
+        $wishlistItems = Session::get('wishlist', []);
         $totalFavorites = count($wishlistItems);
-        $countries = collect($wishlistItems)
-            ->pluck('location')
-            ->unique()
-            ->values()
-            ->all();
+        /** @var Collection $items */
+        $items = collect($wishlistItems);
+        $countries = [];
+
+foreach ($wishlistItems as $item) {
+    if (isset($item['location'])) {
+        $countries[] = $item['location'];
+    }
+}
+
+$countries = array_values(array_unique($countries));
 
         return view('wishlist', compact('wishlistItems', 'totalFavorites', 'countries'));
     }
@@ -31,24 +39,24 @@ class WishlistController extends Controller
             return back()->with('error', 'Destinasi tidak valid.');
         }
 
-        $wishlist = collect(session('wishlist', []));
+        $wishlist = collect(Session::get('wishlist', []));
 
         if ($wishlist->contains('route', $item['route'])) {
             return back()->with('info', 'Destinasi sudah ada di wishlist.');
         }
 
         $wishlist->push($item);
-        session(['wishlist' => $wishlist->all()]);
+        Session::put('wishlist', $wishlist->all());
 
         return back()->with('success', 'Destinasi berhasil ditambahkan ke wishlist.');
     }
 
     public function remove(string $route)
     {
-        $wishlist = collect(session('wishlist', []));
+        $wishlist = collect(Session::get('wishlist', []));
         $updated = $wishlist->reject(fn ($item) => $item['route'] === $route)->values();
 
-        session(['wishlist' => $updated->all()]);
+        Session::put('wishlist', $updated->all());
 
         return back()->with('success', 'Destinasi berhasil dihapus dari wishlist.');
     }
