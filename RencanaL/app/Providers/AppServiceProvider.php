@@ -6,6 +6,8 @@ use Illuminate\Support\ServiceProvider;
 
 use App\Contracts\SearchServiceContract;
 use App\Services\SearchService;
+use App\Contracts\WishlistServiceContract;
+use App\Services\WishlistService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,6 +19,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(
             SearchServiceContract::class,
             SearchService::class
+        );
+
+        $this->app->bind(
+            WishlistServiceContract::class,
+            WishlistService::class
         );
     }
 
