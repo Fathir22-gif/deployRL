@@ -8,6 +8,7 @@ use App\Http\Controllers\BaliController;
 use App\Http\Controllers\RajaAmpatController;
 use App\Http\Controllers\ParisController;
 use App\Http\Controllers\TokyoController;
+use App\Http\Controllers\CommentController;
 
 
 Route::redirect('/', '/login');
@@ -50,6 +51,10 @@ Route::get('/paris', [ParisController::class, 'index'])
 Route::get('/tokyo', [TokyoController::class, 'index'])
     ->middleware('auth')
     ->name('tokyo');
+
+Route::post('/comments', [CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
 
 Route::get('/wishlist', [WishlistController::class, 'index'])
     ->middleware('auth')

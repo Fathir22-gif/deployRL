@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 class RajaAmpatController extends Controller
 {
-    public function index()
+    public function index(\App\Services\CommentService $service)
     {
-        return view('raja-ampat');
+        $comments = $service->getForDestination('raja-ampat');
+        $summary = $service->getSummary('raja-ampat');
+        return view('raja-ampat', ['comments' => $comments, 'destination' => 'raja-ampat', 'commentSummary' => $summary]);
     }
 }
