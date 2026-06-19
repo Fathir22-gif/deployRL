@@ -31,8 +31,8 @@
                 </a>
 
                 <div class="hidden md:flex items-center gap-8 text-sm font-medium text-sky-100/80">
-                    <a href="#" class="text-white border-b-2 border-[#38BDF8] pb-1">Dashboard</a>
-                    <a href="#destinations" class="hover:text-white transition-colors duration-200">Destinasi</a>
+                    <a href="{{ url('/dashboard') }}" class="text-white border-b-2 border-[#38BDF8] pb-1">Dashboard</a>
+                    <a href="{{ url('/dashboard#destinations') }}" class="hover:text-white transition-colors duration-200">Destinasi</a>
                     <a href="{{ route('wishlist') }}" class="hover:text-white transition-colors duration-200">Wishlist</a>
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
@@ -81,8 +81,7 @@
                             name="q"
                             placeholder="Cari destinasi, kota, atau negara..."
                             value="{{ old('q', $q ?? request('q')) }}"
-                            class="flex-1 bg-transparent text-white placeholder-sky-200/60 text-sm px-4 py-4 outline-none"
-                        />
+                            class="flex-1 bg-transparent text-white placeholder-sky-200/60 text-sm px-4 py-4 outline-none" />
                         <button
                             type="submit"
                             class="m-2 px-5 py-2.5 bg-[#38BDF8] hover:bg-sky-400 active:scale-95 text-[#0F172A] font-semibold text-sm rounded-xl transition-all duration-200 flex-shrink-0">
@@ -91,10 +90,10 @@
                     </div>
                 </form>
                 @if(isset($q) && $q !== '')
-                    <div class="mt-4 max-w-xl rounded-3xl bg-white/10 border border-white/20 p-4 text-slate-100 shadow-lg">
-                        <p class="text-sm">Hasil pencarian untuk <span class="font-semibold text-white">"{{ $q }}"</span></p>
-                        <p class="text-xs text-slate-300 mt-1">{{ $results->count() }} destinasi ditemukan.</p>
-                    </div>
+                <div class="mt-4 max-w-xl rounded-3xl bg-white/10 border border-white/20 p-4 text-slate-100 shadow-lg">
+                    <p class="text-sm">Hasil pencarian untuk <span class="font-semibold text-white">"{{ $q }}"</span></p>
+                    <p class="text-xs text-slate-300 mt-1">{{ $results->count() }} destinasi ditemukan.</p>
+                </div>
                 @endif
             </div>
 
@@ -168,47 +167,47 @@
         </div>
 
         @php
-            $destinations = $results ?? [
-                [
-                    'name' => 'Bali',
-                    'location' => 'Indonesia',
-                    'rating' => 4.8,
-                    'route' => 'bali',
-                    'image' => 'images/bali.jpg'
-                ],
-                [
-                    'name' => 'Raja Ampat',
-                    'location' => 'Indonesia',
-                    'rating' => 4.9,
-                    'route' => 'raja-ampat',
-                    'image' => 'images/raja-ampat.jpg'
-                ],
-                [
-                    'name' => 'Paris',
-                    'location' => 'Prancis',
-                    'rating' => 4.9,
-                    'route' => 'paris',
-                    'image' => 'images/paris.jpg'
-                ],
-                [
-                    'name' => 'Tokyo',
-                    'location' => 'Jepang',
-                    'rating' => 4.9,
-                    'route' => 'tokyo',
-                    'image' => 'images/tokyo.jpg'
-                ]
-            ];
+        $destinations = $results ?? [
+        [
+        'name' => 'Bali',
+        'location' => 'Indonesia',
+        'rating' => 4.8,
+        'route' => 'bali',
+        'image' => 'images/bali.jpg'
+        ],
+        [
+        'name' => 'Raja Ampat',
+        'location' => 'Indonesia',
+        'rating' => 4.9,
+        'route' => 'raja-ampat',
+        'image' => 'images/raja-ampat.jpg'
+        ],
+        [
+        'name' => 'Paris',
+        'location' => 'Prancis',
+        'rating' => 4.9,
+        'route' => 'paris',
+        'image' => 'images/paris.jpg'
+        ],
+        [
+        'name' => 'Tokyo',
+        'location' => 'Jepang',
+        'rating' => 4.9,
+        'route' => 'tokyo',
+        'image' => 'images/tokyo.jpg'
+        ]
+        ];
         @endphp
 
         @if(isset($q) && $q !== '' && empty($destinations))
-            <div class="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 shadow-sm">
-                <p class="text-lg font-semibold text-[#0F172A] mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
-                <p class="text-sm">Coba kata kunci lain atau kembali melihat semua destinasi.</p>
-            </div>
+        <div class="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 shadow-sm">
+            <p class="text-lg font-semibold text-[#0F172A] mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
+            <p class="text-sm">Coba kata kunci lain atau kembali melihat semua destinasi.</p>
+        </div>
         @else
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
-                @foreach ($destinations as $destination)
+            @foreach ($destinations as $destination)
             <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
 
                 <!-- Image placeholder -->
@@ -268,8 +267,8 @@
                     <h4 class="text-white font-semibold mb-3 text-sm">Navigasi</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Dashboard</a></li>
-                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Destinasi</a></li>
-                        <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
+                        <li><a href="{{ url('/dashboard#destinations') }}" class="hover:text-[#38BDF8] transition-colors duration-200">Destinasi</a></li>
+                        <li><a href="{{ route('wishlist') }}" class="hover:text-[#38BDF8] transition-colors duration-200">Wishlist</a></li>
                         <li><a href="#" class="hover:text-[#38BDF8] transition-colors duration-200">Trip Saya</a></li>
                     </ul>
                 </div>
