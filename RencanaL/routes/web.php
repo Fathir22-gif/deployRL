@@ -27,7 +27,7 @@ Route::get('/destinations/search', function (Request $request) {
 
     $results = $q === ''
         ? $destinations
-        : $destinations->filter(fn ($destination) => str_contains(strtolower($destination['name']), strtolower($q)) || str_contains(strtolower($destination['location']), strtolower($q)))->values();
+        : $destinations->filter(fn($destination) => str_contains(strtolower($destination['name']), strtolower($q)) || str_contains(strtolower($destination['location']), strtolower($q)))->values();
 
     return view('dashboard', [
         'q' => $q,
