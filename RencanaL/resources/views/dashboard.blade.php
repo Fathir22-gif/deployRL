@@ -119,8 +119,10 @@
                     </svg>
                 </div>
                 <div>
-                    <p class="text-sm text-slate-500">Wishlist Destinations</p>
-                    <p class="text-2xl font-bold text-[#0F172A]">12</p>
+                    <p class="text-slate-500">Wishlist Destinations</p>
+                    <h3 class="text-3xl font-bold">
+                        {{ count(session('wishlist', [])) }}
+                    </h3>
                 </div>
             </div>
 
