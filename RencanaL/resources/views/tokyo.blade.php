@@ -12,6 +12,26 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
+
+        @keyframes heartPop {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.4);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .wishlist-btn:hover .wishlist-heart {
+            animation: heartPop 0.4s ease-in-out;
+            fill: #ef4444;
+            stroke: #ef4444;
+        }
     </style>
 </head>
 
@@ -46,12 +66,10 @@
 
     <!-- Hero Image Section -->
     <section class="relative h-[60vh] md:h-[70vh] bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] overflow-hidden">
-        <div class="absolute inset-0 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-32 h-32 text-white/15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M2 18l6-7 5 5 4-6 5 6" />
-                <circle cx="9" cy="7" r="2.5" />
-            </svg>
-        </div>
+        <img
+            src="{{ asset('images/tokyo.jpg') }}"
+            alt="Tokyo"
+            class="absolute inset-0 w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-[#0F172A]/40 to-transparent"></div>
 
         <div class="absolute bottom-0 left-0 w-full px-4 sm:px-6 lg:px-8 pb-10">
@@ -77,10 +95,10 @@
 
                     <div class="flex items-center gap-3">
                         <span class="inline-flex items-center gap-1.5 bg-white/95 text-[#0F172A] font-semibold text-sm px-4 py-2 rounded-xl shadow-lg">
-                            &#9733; 4.8<span class="text-slate-400 font-normal">/5</span>
+                            &#9733; 4.9<span class="text-slate-400 font-normal">/5</span>
                         </span>
                         <span class="inline-flex items-center gap-1.5 bg-[#38BDF8] text-[#0F172A] font-semibold text-sm px-4 py-2 rounded-xl shadow-lg">
-                            Rp 3.500.000
+                            Rp 22.000.000
                         </span>
                     </div>
                 </div>
@@ -115,19 +133,36 @@
 
                         @php
                         $attractions = [
-                        ['name' => 'Menara Tokyo Skytree', 'desc' => 'Menara tertinggi di Jepang dengan observatorium dan pemandangan kota 360 derajat.'],
-                        ['name' => 'Kuil Senso-ji', 'desc' => 'Kuil Buddha tertua di Tokyo yang penuh dengan suasana tradisional Asakusa.'],
-                        ['name' => 'Shibuya Crossing', 'desc' => 'Persimpangan paling sibuk di dunia yang menjadi simbol kehidupan modern Tokyo.'],
-                        ['name' => 'Taman Ueno', 'desc' => 'Taman luas dengan museum, kebun binatang, dan bunga sakura yang cantik saat musim semi.'],
+                        [
+                        'name' => 'Tokyo Tower',
+                        'desc' => 'Menara ikonik Tokyo dengan panorama kota yang menakjubkan.',
+                        'image' => 'images/tokyo-gallery/tokyoskytree.jpg'
+                        ],
+                        [
+                        'name' => 'Shibuya Crossing',
+                        'desc' => 'Persimpangan tersibuk di dunia dan simbol kehidupan modern Tokyo.',
+                        'image' => 'images/tokyo-gallery/shibuya.jpg'
+                        ],
+                        [
+                        'name' => 'Senso-ji Temple',
+                        'desc' => 'Kuil Buddha tertua di Tokyo yang menjadi destinasi wisata budaya populer.',
+                        'image' => 'images/tokyo-gallery/sensoji.jpg'
+                        ],
+                        [
+                        'name' => 'Mount Fuji View Point',
+                        'desc' => 'Spot terbaik menikmati keindahan Gunung Fuji dari sekitar Tokyo.',
+                        'image' => 'images/tokyo-gallery/fuji.jpg'
+                        ],
                         ];
                         @endphp
 
                         @foreach ($attractions as $attraction)
                         <div class="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div class="h-32 bg-gradient-to-br from-[#1E3A8A] to-[#38BDF8] flex items-center justify-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10 text-white/50 group-hover:scale-110 transition-transform duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 21h18M5 21V7l7-4 7 4v14M9 9h6m-6 4h6m-6 4h6" />
-                                </svg>
+                            <div class="h-48 overflow-hidden">
+                                <img
+                                    src="{{ asset($attraction['image']) }}"
+                                    alt="{{ $attraction['name'] }}"
+                                    class="w-full h-full object-cover">
                             </div>
                             <div class="p-4">
                                 <h3 class="font-semibold text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors duration-200">
@@ -143,85 +178,127 @@
 
                 <!-- Photo Gallery -->
                 <section>
-                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Galeri Foto</h2>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        @for ($i = 1; $i <= 6; $i++)
-                            <div class="group aspect-square rounded-2xl bg-gradient-to-br from-[#0F172A] via-[#1E3A8A] to-[#38BDF8] flex items-center justify-center shadow-md hover:shadow-xl hover:scale-[1.03] transition-all duration-300 cursor-pointer overflow-hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white/40 group-hover:text-white/60 transition-colors duration-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2" />
-                                <circle cx="8.5" cy="8.5" r="1.5" />
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 15l-5-5L5 21" />
-                            </svg>
-                    </div>
-                    @endfor
-            </div>
-            </section>
-
-            <!-- Testimonials -->
-            <section>
-                <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">
+                        Galeri Foto
+                    </h2>
 
                     @php
-                    $testimonials = [
-                    ['name' => 'Dewi Anggraini', 'text' => 'Tokyo sungguh menakjubkan! Shibuya Crossing dan kuliner ramen membuat perjalanan sangat berkesan.'],
-                    ['name' => 'Reza Pratama', 'text' => 'Kuil Senso-ji memancarkan kedamaian yang kontras dengan kesibukan kota. Transportasi dan layanan sangat efisien.'],
-                    ['name' => 'Maya Putri', 'text' => 'Musim semi di Tokyo sangat indah dengan sakura di Taman Ueno. Kota ini menawarkan kombinasi tradisi dan modern yang sempurna.'],
+                    $gallery = [
+                    'images/tokyo-gallery/tokyo1.jpg',
+                    'images/tokyo-gallery/tokyo2.jpg',
+                    'images/tokyo-gallery/tokyo3.jpg',
+                    'images/tokyo-gallery/tokyo4.jpg',
+                    'images/tokyo-gallery/tokyo5.jpg',
+                    'images/tokyo-gallery/tokyo6.jpg',
                     ];
                     @endphp
 
-                    @foreach ($testimonials as $testimonial)
-                    <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                        <div class="flex items-center gap-3 mb-3">
-                            <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
-                                {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
-                            </div>
-                            <div>
-                                <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
-                                <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                            </div>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+                        @foreach($gallery as $image)
+                        <div class="overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300">
+
+                            <img
+                                src="{{ asset($image) }}"
+                                alt="Tokyo"
+                                class="w-full aspect-square object-cover hover:scale-110 transition duration-500">
+
                         </div>
-                        <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
+                        @endforeach
+
                     </div>
-                    @endforeach
+                </section>
 
-                </div>
-            </section>
+                <!-- Testimonials -->
+                <section>
+                    <h2 class="text-2xl font-bold text-[#0F172A] mb-5">Ulasan Wisatawan</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
-        </div>
+                        @php
+                        $testimonials = [
+                        [
+                        'name' => 'Yuki Tanaka',
+                        'text' => 'Tokyo sangat bersih dan teratur. Transportasinya mudah digunakan dan banyak tempat menarik untuk dikunjungi.'
+                        ],
+                        [
+                        'name' => 'Michael Chen',
+                        'text' => 'Shibuya Crossing dan Tokyo Tower menjadi pengalaman paling berkesan selama perjalanan saya ke Jepang.'
+                        ],
+                        [
+                        'name' => 'Sarah Williams',
+                        'text' => 'Melihat bunga sakura mekar di Tokyo adalah pengalaman yang tidak akan pernah saya lupakan.'
+                        ],
+                        ];
+                        @endphp
 
-        <!-- Right Column / Sidebar -->
-        <aside class="lg:col-span-1">
-            <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
-                <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
+                        @foreach ($testimonials as $testimonial)
+                        <div class="bg-white rounded-2xl shadow-md p-5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-10 h-10 rounded-full bg-[#1E3A8A] text-white flex items-center justify-center font-semibold text-sm">
+                                    {{ strtoupper(substr($testimonial['name'], 0, 1)) }}
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-[#0F172A] text-sm">{{ $testimonial['name'] }}</p>
+                                    <p class="text-[#38BDF8] text-xs">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                                </div>
+                            </div>
+                            <p class="text-slate-500 text-sm leading-relaxed">"{{ $testimonial['text'] }}"</p>
+                        </div>
+                        @endforeach
 
-                <div class="space-y-3 text-sm">
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Lokasi</span>
-                        <span class="font-semibold text-[#0F172A]">Tokyo, Jepang</span>
                     </div>
-                    <div class="flex items-center justify-between border-b border-slate-100 pb-3">
-                        <span class="text-slate-500">Rating</span>
-                        <span class="font-semibold text-[#0F172A]">&#9733; 4.8/5</span>
-                    </div>
-                    <div class="flex items-center justify-between pb-1">
-                        <span class="text-slate-500">Estimasi Budget</span>
-                        <span class="font-semibold text-[#0F172A]">Rp 3.500.000</span>
-                    </div>
-                </div>
+                </section>
 
-                <button class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
-                    </svg>
-                    Add to Wishlist
-                </button>
-
-                <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
-                    Back to Dashboard
-                </button>
             </div>
-        </aside>
+
+            <!-- Right Column / Sidebar -->
+            <aside class="lg:col-span-1">
+                <div class="bg-white rounded-2xl shadow-xl p-6 sticky top-24">
+                    <h3 class="text-lg font-bold text-[#0F172A] mb-4">Ringkasan Destinasi</h3>
+
+                    <div class="space-y-3 text-sm">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <span class="text-slate-500">Lokasi</span>
+                            <span class="font-semibold text-[#0F172A]">Tokyo, Jepang</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                            <span class="text-slate-500">Rating</span>
+                            <span class="font-semibold text-[#0F172A]">&#9733; 4.9/5</span>
+                        </div>
+                        <div class="flex items-center justify-between pb-1">
+                            <span class="text-slate-500">Estimasi Budget</span>
+                            <span class="font-semibold text-[#0F172A]">Rp 22.000.000</span>
+                        </div>
+                    </div>
+
+                    <form action="{{ route('wishlist.add') }}" method="POST">
+                        @csrf
+
+                        <input type="hidden" name="destination" value="tokyo">
+
+                        <button
+                            type="submit"
+                            class="wishlist-btn mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-[#1E3A8A] to-[#38BDF8] text-white font-semibold shadow-lg hover:shadow-xl hover:shadow-sky-400/40 hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="wishlist-heart w-5 h-5"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.8">
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 21s-7.5-4.6-10-9.1C.5 8.1 2.4 4.5 6 4.1c2-.2 3.8.9 5 2.4 1.2-1.5 3-2.6 5-2.4 3.6.4 5.5 4 4 7.8C19.5 16.4 12 21 12 21z" />
+                            </svg>
+
+                            <span>Add to Wishlist</span>
+                        </button>
+                    </form>
+
+                    <button onclick="window.history.back()" class="mt-3 w-full py-3 rounded-xl border border-slate-200 text-[#0F172A] font-semibold hover:bg-slate-50 hover:border-[#1E3A8A]/30 transition-all duration-200">
+                        Back to Dashboard
+                    </button>
+                </div>
+            </aside>
 
         </div>
     </main>
