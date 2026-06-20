@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - RencanaLiburan</title>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        };
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -94,7 +99,7 @@
             </div>
 
             <a href="#destinations"
-                class="mt-6 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200">
+                class="mt-6 inline-flex items-center gap-2 bg-white text-[#0F172A] font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:bg-[#38BDF8] hover:text-white hover:scale-105 active:scale-95 transition-all duration-200 dark:bg-[#0F172A] dark:text-white">
                 Explore Destinations
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6l6 6-6 6" />
@@ -116,7 +121,7 @@
                 </div>
                 <div>
                     <p class="text-slate-500">Wishlist Destinations</p>
-                    <h3 class="text-3xl font-bold">
+                    <h3 class="stat-number text-3xl font-bold text-[#0F172A]">
                         {{ count(session('wishlist', [])) }}
                     </h3>
                 </div>
@@ -132,7 +137,7 @@
                 </div>
                 <div>
                     <p class="text-sm text-slate-500">Planned Trips</p>
-                    <p class="text-2xl font-bold text-[#0F172A]">4</p>
+                    <p class="stat-number text-2xl font-bold text-[#0F172A]">4</p>
                 </div>
             </div>
 
@@ -145,7 +150,7 @@
                 </div>
                 <div>
                     <p class="text-sm text-slate-500">Total Budget</p>
-                    <p class="text-2xl font-bold text-[#0F172A]">Rp 24,5jt</p>
+                    <p class="stat-number text-2xl font-bold text-[#0F172A]">Rp 24,5jt</p>
                 </div>
             </div>
 
@@ -155,8 +160,8 @@
     <!-- Featured Destinations -->
     <section id="destinations" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24">
         <div class="flex items-end justify-between mb-8">
-            <div>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#0F172A]">Featured Destinations</h2>
+                <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#0F172A] dark:text-white">Featured Destinations</h2>
                 <p class="text-slate-500 text-sm mt-1">Pilihan destinasi terbaik untuk liburan impianmu</p>
             </div>
             <a href="#" class="hidden sm:inline-flex text-[#1E3A8A] font-semibold text-sm hover:text-[#38BDF8] transition-colors duration-200">
@@ -199,7 +204,7 @@
 
         @if(isset($q) && $q !== '' && empty($destinations))
         <div class="rounded-3xl border border-slate-200 bg-white p-10 text-center text-slate-500 shadow-sm">
-            <p class="text-lg font-semibold text-[#0F172A] mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
+            <p class="text-lg font-semibold text-[#0F172A] dark:text-white mb-2">Tidak ada destinasi untuk "{{ $q }}"</p>
             <p class="text-sm">Coba kata kunci lain atau kembali melihat semua destinasi.</p>
         </div>
         @else
@@ -214,14 +219,14 @@
                         src="{{ asset($destination['image']) }}"
                         alt="{{ $destination['name'] }}"
                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                    <span class="absolute top-3 right-3 bg-white/90 text-[#0F172A] text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm">
+                    <span class="absolute top-3 right-3 bg-white/90 text-[#0F172A] text-xs font-semibold px-2.5 py-1 rounded-full shadow-sm dark:bg-white/10 dark:text-white">
                         ★ {{ $destination['rating'] }}
                     </span>
                 </div>
 
                 <!-- Content -->
                 <div class="p-5">
-                    <h3 class="font-bold text-lg text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors duration-200">
+                    <h3 class="destination-title font-bold text-lg text-[#0F172A] group-hover:text-[#1E3A8A] transition-colors duration-200">
                         {{ $destination['name'] }}
                     </h3>
                     <p class="text-slate-500 text-sm mt-1 flex items-center gap-1">
