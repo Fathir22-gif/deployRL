@@ -57,8 +57,11 @@
                     <a href="#" class="hover:text-white transition-colors duration-200">Trip Saya</a>
                 </div>
 
-                <div class="w-9 h-9 rounded-full bg-[#38BDF8] flex items-center justify-center text-[#0F172A] font-bold text-sm">
-                    T
+                <div class="flex items-center gap-3">
+                    @include('components.theme-toggle')
+                    <div class="w-9 h-9 rounded-full bg-[#38BDF8] flex items-center justify-center text-[#0F172A] font-bold text-sm">
+                        T
+                    </div>
                 </div>
             </div>
         </div>
