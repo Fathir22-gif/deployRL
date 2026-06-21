@@ -302,6 +302,7 @@
         </div>
     </footer>
 
+    @include('components.chat-widget')
 </body>
 
 </html>

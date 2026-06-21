@@ -9,6 +9,7 @@ use App\Http\Controllers\RajaAmpatController;
 use App\Http\Controllers\ParisController;
 use App\Http\Controllers\TokyoController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ChatController;
 
 
 Route::redirect('/', '/login');
@@ -55,6 +56,10 @@ Route::get('/tokyo', [TokyoController::class, 'index'])
 Route::post('/comments', [CommentController::class, 'store'])
     ->middleware('auth')
     ->name('comments.store');
+
+Route::post('/chat', [ChatController::class, 'send'])
+    ->middleware('auth')
+    ->name('chat.send');
 
 Route::get('/wishlist', [WishlistController::class, 'index'])
     ->middleware('auth')
