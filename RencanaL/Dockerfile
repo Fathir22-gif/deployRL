@@ -4,23 +4,22 @@ FROM php:8.3-cli-bullseye AS build
 
 # PHP dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    unzip \
-    zip \
     libzip-dev \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
     libicu-dev \
     libsqlite3-dev \
-    curl \
  && docker-php-ext-install \
     intl \
     pdo_sqlite \
     mbstring \
     exif \
     bcmath \
-    zip
+    zip \
+ && a2dismod mpm_event \
+ && a2enmod mpm_prefork \
+ && a2enmod rewrite
 
 # Install Node.js 20 (required for Vite 7/8)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
