@@ -2,7 +2,7 @@
 
 FROM php:8.3-cli-bullseye AS build
 
-# Install system dependencies for PHP, Composer, and Node asset build
+# PHP dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git \
     unzip \
@@ -12,38 +12,39 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libonig-dev \
     libxml2-dev \
     libicu-dev \
+    libsqlite3-dev \
     curl \
-    nodejs \
-    npm \
-  && docker-php-ext-install \
+ && docker-php-ext-install \
     intl \
-    pdo_mysql \
+    pdo_sqlite \
     mbstring \
     exif \
     bcmath \
-    zip \
-  && rm -rf /var/lib/apt/lists/*
+    zip
+
+# Install Node.js 20 (required for Vite 7/8)
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+ && apt-get install -y nodejs
 
 WORKDIR /app
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/download/latest-stable/composer.phar -o /usr/local/bin/composer \
-    && chmod +x /usr/local/bin/composer
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copy composer files first for dependency caching
+# Composer dependencies
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts
 
-# Copy Node files and install frontend dependencies
+# Node dependencies
 COPY package.json package-lock.json* ./
-RUN npm install --legacy-peer-deps
+RUN npm install
 
-# Copy the rest of the application and build assets
-COPY . ./
+# Application files
+COPY . .
+
+# Build Vite assets
 RUN npm run build
-RUN php artisan key:generate
 
-# Prepare the production image
 FROM php:8.3-apache AS runtime
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -52,22 +53,21 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libonig-dev \
     libxml2-dev \
     libicu-dev \
-  && docker-php-ext-install \
+    libsqlite3-dev \
+ && docker-php-ext-install \
     intl \
-    pdo_mysql \
+    pdo_sqlite \
     mbstring \
     exif \
     bcmath \
     zip \
-  && a2enmod rewrite \
-  && rm -rf /var/lib/apt/lists/*
+ && a2enmod rewrite
 
 WORKDIR /var/www/html
 
 COPY --from=build /app /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
 
