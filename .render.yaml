@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: RencanaL Laravel App
+    env: php
+    region: oregon
+    plan: free
+    branch: main
+    root: RencanaL
+    buildCommand: |
+      composer install --no-dev --prefer-dist --no-progress --optimize-autoloader
+      php -r "file_exists('.env') || copy('.env.example', '.env');"
+      php artisan key:generate
+      php artisan config:cache
+      npm install --ignore-scripts
+      npm run build
+    startCommand: php artisan serve --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: 'false'
+      - key: APP_URL
+        value: https://your-app.onrender.com
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: NODE_ENV
+        value: production
+    healthCheckPath: /
+    disk: 512
