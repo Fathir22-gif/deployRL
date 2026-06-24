@@ -1,73 +1,42 @@
-# syntax=docker/dockerfile:1
+FROM php:8.3-cli
 
-FROM php:8.3-cli-bullseye AS build
+RUN apt-get update && apt-get install -y 
+git 
+unzip 
+zip 
+curl 
+libzip-dev 
+libpng-dev 
+libonig-dev 
+libxml2-dev 
+libicu-dev 
+libsqlite3-dev
 
-# PHP dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libicu-dev \
-    libsqlite3-dev \
- && docker-php-ext-install \
-    intl \
-    pdo_sqlite \
-    mbstring \
-    exif \
-    bcmath \
-    zip \
- && a2dismod mpm_event \
- && a2enmod mpm_prefork \
- && a2enmod rewrite
+RUN docker-php-ext-install 
+intl 
+pdo_sqlite 
+mbstring 
+bcmath 
+exif 
+zip
 
-# Install Node.js 20 (required for Vite 7/8)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
- && apt-get install -y nodejs
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - 
+&& apt-get install -y nodejs
+
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
 
-# Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
-# Composer dependencies
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --prefer-dist --no-interaction --optimize-autoloader --no-scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction
 
-# Node dependencies
 COPY package.json package-lock.json* ./
 RUN npm install
 
-# Application files
 COPY . .
 
-# Build Vite assets
 RUN npm run build
 
-FROM php:8.3-apache AS runtime
+EXPOSE 8080
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    libzip-dev \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libicu-dev \
-    libsqlite3-dev \
- && docker-php-ext-install \
-    intl \
-    pdo_sqlite \
-    mbstring \
-    exif \
-    bcmath \
-    zip \
- && a2enmod rewrite
-
-WORKDIR /var/www/html
-
-COPY --from=build /app /var/www/html
-
-RUN chown -R www-data:www-data /var/www/html
-
-EXPOSE 80
-
-CMD ["apache2-foreground"]
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-8080}
